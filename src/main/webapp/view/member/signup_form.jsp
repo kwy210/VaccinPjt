@@ -22,9 +22,10 @@
 	
 		<h1>SIGNUP FORM</h1>
 		
-		<form action="<%=request.getContextPath()%>/signup_confirm.mem"
+		<form 
+		action="<%=request.getContextPath()%>/signup_confirm.mem"
 		 method="POST" 
-		 name="/signup_form.mem">
+		 name="signup_form">
 		
 		<input class="basic_input" type="text" name="admin_id" placeholder="Input new admin ID">
 				<br>

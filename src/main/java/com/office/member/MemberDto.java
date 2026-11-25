@@ -11,9 +11,7 @@ public class MemberDto {
 	private String admin_reg_date;		
 	private String admin_mod_date;
 	
-	public MemberDto() {
-		
-	}
+	public MemberDto() {}
 
 	public MemberDto(int admin_no, String admin_id, String admin_pw, String admin_mail, String admin_phone,
 			String admin_reg_date, String admin_mod_date) {
@@ -27,10 +25,8 @@ public class MemberDto {
 		this.admin_mod_date = admin_mod_date;
 	}
 	
-	public MemberDto(int admin_no, String admin_id, String admin_pw, String admin_mail, String admin_phone
+	public MemberDto(String admin_id, String admin_pw, String admin_mail, String admin_phone
 	) {
-		
-		this.admin_no = admin_no;
 		this.admin_id = admin_id;
 		this.admin_pw = admin_pw;
 		this.admin_mail = admin_mail;

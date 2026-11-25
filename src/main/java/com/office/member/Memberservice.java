@@ -20,11 +20,20 @@ public class MemberService {
 		String admin_mail = request.getParameter("admin_mail");
 		String admin_phone = request.getParameter("admin_phone");
 	
-	boolean	isMember = memberDao.isMember(admin_id);
+
+		boolean isMember = memberDao.isMember(admin_id);
 	
-	if (!isMember) {
-		memberDao.insertNewMember(
-				new MemberDto(admin_id, admin_pw, admin_mail,admin_phone));
+		if (!isMember) {
+			int result = memberDao.insertNewMember(
+					new MemberDto(admin_id, admin_pw, admin_mail, admin_phone));
+	
+	if (result > 0) {
+		System.out.println("[MemberService] Sign_up SUCCESS");
+	} else {
+		System.out.println("[MemberService] Sigm_ng FAIL");
+	}
+	
+	
 	}
 		
 		
@@ -32,6 +41,25 @@ public class MemberService {
 		// 회원가입
 		
 		return 0;
+	}
+
+	public String signinform(HttpServletRequest request, HttpServletResponse response) {
+	
+		String memId = request.getParameter("memId");
+		String memPw = request.getParameter("memPw");
+		
+		MemberDto selectedMemberDto = memberDao.selectMemberByMemId(memId);
+		
+		if (selectedMemberDto != null &&selectedMemberDto.getAdmin_pw().equals(admin_pw)) {
+			System.out.println("[MemberService] Sign_up SUCCESS");
+			
+			return admin_id;
+			
+		} else {
+			System.out.println("[MemberService] Sigm_ng FAIL");
+		
+			return null;
+		
 	}
 	
 }

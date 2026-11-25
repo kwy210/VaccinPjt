@@ -39,8 +39,19 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			memberService = new MemberService(new MemberDao()); //제어의 역전 ioc
 			int resultForConfirm  = memberService.signupConfirm(request, response);
 			
+			if (resultForConfirm > 0) {
+				nextPage = generateView("sign_ok");
+			}else {
+				nextPage = generateView("sign_ng");
+			}
+			
 			break;
-
+			
+		case "/signin_form.mem":
+			
+			nextPage = generater
+			
+			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
