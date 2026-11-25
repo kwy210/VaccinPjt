@@ -21,3 +21,36 @@ li {
 	list-style: none;
 	float: left;
 }
+/* input common css start */
+
+.basic_input {
+	width: 350px;
+	padding: 7px;
+	margin: 2px;
+	outline: none;
+}
+
+.basic_input:focus {
+	background-color: rgba(0, 0, 0, .2);
+}
+
+.basic_button {
+	width: 120px;
+	padding: 7px;
+	margin: 2px;
+	outline: none;
+	font-size: 1.2em;
+	border: 1px solid #dadada;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.basic_button:hover {
+	background-color: rgba(0, 0, 0, .1);
+	box-shadow: 3px 3 3px rgba(200, 200, 200, .4);
+}
+
+
+
+/* input common css end */
+

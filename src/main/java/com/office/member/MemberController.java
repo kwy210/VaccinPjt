@@ -1,5 +1,6 @@
 package com.office.member;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,21 +14,49 @@ public class MemberController extends HttpServlet {
        
     
     public MemberController() {
-       
-      
+        super();
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String requestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String command = requestURI.substring(contextPath.length());
+		
+		MemberService memberService = null;
+		String nextPage = null;
+		
+		switch (command) {
+		case "/signup_form.mem":		// 회원가입 양식
+			
+			nextPage = generateView("signup_form");
+			
+			break;
+			
+		case "/signup_confirm.mem":		// 회원가입 확인
+			
+			memberService = new MemberService(new MemberDao()); //제어의 역전 ioc
+			int resultForConfirm  = memberService.signupConfirm(request, response);
+			
+			break;
+
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+		dispatcher.forward(request, response);
 		
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		doGet(request, response);
 	}
 
+	private String generateView(String viewName) {
+		return "view/member/" + viewName + ".jsp";
+		
+	}
+	
 }

@@ -2,6 +2,7 @@ package com.office.member;
 
 public class MemberDto {
 
+	
 	private int admin_no;			
 	private String admin_id;			
 	private String admin_pw;			
@@ -16,7 +17,7 @@ public class MemberDto {
 
 	public MemberDto(int admin_no, String admin_id, String admin_pw, String admin_mail, String admin_phone,
 			String admin_reg_date, String admin_mod_date) {
-		super();
+		
 		this.admin_no = admin_no;
 		this.admin_id = admin_id;
 		this.admin_pw = admin_pw;
@@ -26,9 +27,9 @@ public class MemberDto {
 		this.admin_mod_date = admin_mod_date;
 	}
 	
-	public MemberDto(int admin_no, String admin_id, String admin_pw, String admin_mail, String admin_phone,
-			String admin_reg_date, String admin_mod_date) {
-		super();
+	public MemberDto(int admin_no, String admin_id, String admin_pw, String admin_mail, String admin_phone
+	) {
+		
 		this.admin_no = admin_no;
 		this.admin_id = admin_id;
 		this.admin_pw = admin_pw;
