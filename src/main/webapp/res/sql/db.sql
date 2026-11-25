@@ -79,7 +79,7 @@ create database db_vaccin;
 show databases;
 use db_vaccin;
 
--- 백신 타입 테이블 
+-- 백신 타입 테이블 ----------------------------------------------------------------
 create table  tbl_fv_type(
 	fv_type_no					int auto_increment comment '백신 번호',
 	fv_type						varchar(1) not null comment '백신 타입',

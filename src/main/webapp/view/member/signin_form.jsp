@@ -31,7 +31,7 @@
 				<br>
 				<input class="basic_input" type="password" name="admin_pw" placeholder="Input new admin PW">
 				<br>
-				<input class="basic_button" type="button" value="SIGN UP" onclick="signupForm();">
+				<input class="basic_button" type="button" value="SIGN UP" onclick="signinForm();">
 				<input class="basic_button" type="reset" value="RESET">
 			</form>
 		

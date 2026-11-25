@@ -22,43 +22,43 @@ public class MemberService {
 	
 
 		boolean isMember = memberDao.isMember(admin_id);
-	
+		
+		int result = 0;
+		
 		if (!isMember) {
-			int result = memberDao.insertNewMember(
+			result = memberDao.insertNewMember(
 					new MemberDto(admin_id, admin_pw, admin_mail, admin_phone));
 	
 	if (result > 0) {
 		System.out.println("[MemberService] Sign_up SUCCESS");
+		
 	} else {
 		System.out.println("[MemberService] Sigm_ng FAIL");
 	}
 	
-	
-	}
+		} else {
+			result = 0;
+			
+		}
 		
-		
-		
-		// 회원가입
-		
-		return 0;
+		return result;
 	}
 
-	public String signinform(HttpServletRequest request, HttpServletResponse response) {
+	public String signinConfirm(HttpServletRequest request, HttpServletResponse response) {
 	
-		String memId = request.getParameter("memId");
-		String memPw = request.getParameter("memPw");
+		String admin_id = request.getParameter("admin_id");
+		String admin_pw = request.getParameter("admin_pw");
 		
-		MemberDto selectedMemberDto = memberDao.selectMemberByMemId(memId);
+		MemberDto selectedMemberDto = memberDao.selectMemberByMemId(admin_id);
 		
-		if (selectedMemberDto != null &&selectedMemberDto.getAdmin_pw().equals(admin_pw)) {
-			System.out.println("[MemberService] Sign_up SUCCESS");
-			
+		if (selectedMemberDto != null && selectedMemberDto.getAdmin_pw().equals(admin_pw)) {
+			System.out.println("[MemberService] SIGNIN SUCCESS!!");
+
 			return admin_id;
 			
-		} else {
-			System.out.println("[MemberService] Sigm_ng FAIL");
+		} 
 		
-			return null;
+		return null;
 		
 	}
 	

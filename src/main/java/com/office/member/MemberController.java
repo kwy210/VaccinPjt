@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 @WebServlet("*.mem")
@@ -37,20 +39,50 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		case "/signup_confirm.mem":		// 회원가입 확인
 			
 			memberService = new MemberService(new MemberDao()); //제어의 역전 ioc
-			int resultForConfirm  = memberService.signupConfirm(request, response);
+			int resultForSignupConfirm  = memberService.signupConfirm(request, response);
 			
-			if (resultForConfirm > 0) {
-				nextPage = generateView("sign_ok");
+			if (resultForSignupConfirm > 0) {
+				nextPage = generateView("signup_ok");
 			}else {
-				nextPage = generateView("sign_ng");
+				nextPage = generateView("signup_ng");
 			}
 			
 			break;
 			
 		case "/signin_form.mem":
 			
-			nextPage = generater
+			nextPage = generateView("signin_form");
 			
+			break;
+			
+		case "/signin_confirm.mem":
+			
+			memberService = new MemberService(new MemberDao());
+			String signinedAdminId = memberService.signinConfirm(request, response);
+			
+			if (signinedAdminId != null) {
+				System.out.println("[MemberController] SIGNIN SUCCESS!!");
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("signinedAdminId", signinedAdminId);
+				session.setMaxInactiveInterval(60 * 30);
+				
+				nextPage = generateView("signin_ok");
+				
+			} else {
+				System.out.println("[MemberController] SIGNIN FAIL!!");
+				
+				nextPage = generateView("signin_ng");
+				
+			}
+			
+			break;
+			
+		case "/signout_confirm.mem":
+			request.getSession().invalidate();
+			nextPage = "/" ;
+			
+			break;
 			
 		}
 		
