@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.office.DatabaseInfo;
@@ -15,7 +16,7 @@ public class VaccinDao implements DatabaseInfo {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = -1;
-		
+		List<VaccinDto> vaccinDtos = ArrayList<VaccinDto>();
 		try {
 			
 			Class.forName(DRIVER);
@@ -102,9 +103,24 @@ public class VaccinDao implements DatabaseInfo {
 				String fvp_reg_date = rs.getString("fvp_reg_date");
 				
 				// SocialNumberDto
+				rs.getString("ss_number");
+				rs.getString("ss_name");
+				rs.getString("ss_addr");
+				rs.getString("ss_phone");
+				rs.getString("ss_date");
 				
 				
+				// LocationDto
+				int fv_location_no = rs.getString("fv_location_name");
 				
+				// TypeDto
+				
+				// assemble
+				
+				VaccinDto vaccinDto = new VaccinDto(fvp_no, fvp_name, null, fvp_mail, fvp_phone, fv_location_no, fv_type, fvp_reg_date)
+				
+				SocialNumberDto socialNumberDto = new SocialNumberDto(s, fv_type, fvp_phone, fvp_reg_date)		
+						
 			}
 			
 		} catch (Exception e) {
@@ -125,7 +141,7 @@ public class VaccinDao implements DatabaseInfo {
 			
 		}
 		
-		return result;
+		return vaccinDtos;
 		
 	}
 

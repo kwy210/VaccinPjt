@@ -167,7 +167,7 @@ create table tbl_flu_vaccin_person(
 	fvp_phone 		int 		not null comment '접종자 번호',
 	fv_location_no	int         not null comment '접종처 번호', 
 	fv_type			varchar(1)  not null comment '백신 타입',
-	fvp_date  		timestamp   default  CURRENT_TIMESTAMP() comment '등록일',
+	fvp_Reg_date  		timestamp   default  CURRENT_TIMESTAMP() comment '등록일',
 	primary key(fvp_no)
 );
 
