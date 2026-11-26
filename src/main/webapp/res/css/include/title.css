@@ -50,7 +50,18 @@ li {
 	box-shadow: 3px 3 3px rgba(200, 200, 200, .4);
 }
 
+.basic_select {
+	width: 368px;
+	padding: 10px 7px;
+	margin: 2px;
+	outline: none;
+	border: 1px solid #dadada;
+	border-radius: 5px;
+}
 
+.basic_select:focus {
+	background-color: rgba(0,0,255,.1);
+}
 
 /* input common css end */
 

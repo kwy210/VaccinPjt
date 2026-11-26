@@ -186,10 +186,17 @@ create table tbl_admin(
 	primary key(admin_no)
 );
 
+
 select * from tbl_admin;
 desc tbl_admin;
 
-
-
+select * from tbl_flu_vaccin_person fvp
+join tbl_social_number sn
+on fvp.ss_number = sn.ss_number
+join tbl_fv_location fl
+on fl.fv_location_no = fl.fv_location_no
+join tbl_fv_type ft
+on fvp.fv_type = ft.fv_type 
+order by fvp.fvp_no desc;
 
 
