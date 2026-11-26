@@ -27,11 +27,11 @@
 		 method="POST" 
 		 name="signin_form">
 		
-		<input class="basic_input" type="text" name="admin_id" placeholder="Input new admin ID">
+		<input class="basic_input" type="text" name="admin_id" placeholder="Input admin ID">
 				<br>
 				<input class="basic_input" type="password" name="admin_pw" placeholder="Input new admin PW">
 				<br>
-				<input class="basic_button" type="button" value="SIGN UP" onclick="signinForm();">
+			<input class="basic_button" type="button"value="SIGN IN" onclick="signinForm();">
 				<input class="basic_button" type="reset" value="RESET">
 			</form>
 		

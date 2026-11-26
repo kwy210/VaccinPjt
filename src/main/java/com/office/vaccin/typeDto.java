@@ -1,13 +1,13 @@
 package com.office.vaccin;
 
-public class typeDto {
+public class TypeDto {
 
 	private int fv_type_no;					
 	private String fv_type;						
 	private String fv_type_manuf_country;		
 	private String fv_type_manuf_date;
 	
-	public typeDto(int fv_type_no, String fv_type, String fv_type_manuf_country, String fv_type_manuf_date) {
+	public TypeDto(int fv_type_no, String fv_type, String fv_type_manuf_country, String fv_type_manuf_date) {
 		
 		this.fv_type_no = fv_type_no;
 		this.fv_type = fv_type;
