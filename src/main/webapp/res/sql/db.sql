@@ -91,6 +91,7 @@ create table  tbl_fv_type(
 select * from tbl_fv_type;
 desc tbl_fv_type;
 drop table tbl_fv_type;
+delete from tbl_fv_type where fv_type_no >= 6;
 
 insert into tbl_fv_type(fv_type, fv_type_manuf_country, fv_type_manuf_date) 
 values ('A', '한국', '2023-01-10');
@@ -164,16 +165,22 @@ create table tbl_flu_vaccin_person(
 	fvp_name 		VARCHAR(30)	not null comment '접종자 이름', 
 	ss_number		VARCHAR(20) not null comment '주민등록 번호', 
 	fvp_mail		VARCHAR(30)	not null comment '접종자 메일',
-	fvp_phone 		int 		not null comment '접종자 번호',
+	fvp_phone  		VARCHAR(30) NOT NULL COMMENT '접종자 번호',
 	fv_location_no	int         not null comment '접종처 번호', 
 	fv_type			varchar(1)  not null comment '백신 타입',
-	fvp_Reg_date  		timestamp   default  CURRENT_TIMESTAMP() comment '등록일',
+	fvp_Reg_date  	timestamp   default  CURRENT_TIMESTAMP() comment '등록일',
 	primary key(fvp_no)
 );
+
+drop table tbl_flu_vaccin_person;
 
 select * from tbl_flu_vaccin_person;
 desc tbl_flu_vaccin_person;
 
+ALTER table tbl_flu_vaccin_person MODIFY column fvp_Reg_date timestamp   default  CURRENT_TIMESTAMP() comment '등록일';
+
+ALTER table tbl_flu_vaccin_person MODIFY COLUMN fvp_phone VARCHAR(30) NOT NULL COMMENT '접종자 번호';
+-- fvp_phone 의 데이터 종류를 int 가 아닌 VARCHAR(30) 으로 변경 해주는 방법 
 -- 관리자 맴버 테이블 -----------
 create table tbl_admin(
 	admin_no			int       auto_increment,
@@ -181,11 +188,12 @@ create table tbl_admin(
 	admin_pw			VARCHAR(20)  not null,
 	admin_mail			VARCHAR(50)  not null,
 	admin_phone			VARCHAR(30)  not null,
-	admin_reg_date		timestamp		default  CURRENT_TIMESTAMP,
-	admin_mod_date		timestamp		default  CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+	admin_reg_date		timestamp	default  CURRENT_TIMESTAMP,
+	admin_mod_date		timestamp	default  CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
 	primary key(admin_no)
 );
 
+SELECT DATABASE();          -- 지금 선택된 데이버 베이스가 무엇인지 확인용 ------
 
 select * from tbl_admin;
 desc tbl_admin;
@@ -198,5 +206,25 @@ on fl.fv_location_no = fl.fv_location_no
 join tbl_fv_type ft
 on fvp.fv_type = ft.fv_type 
 order by fvp.fvp_no desc;
+
+
+
+
+select * from tbl_flu_vaccin_person fvp 
+join tbl_social_number sn 
+on fvp.ss_number = sn.ss_number 
+join tbl_fv_location fl  
+on fvp.fv_location_no = fl.fv_location_no  
+join tbl_fv_type ft  
+on fvp.fv_type = ft.fv_type  
+order by fvp.fvp_no desc;
+
+
+
+select * from tbl_flu_vaccin_person fvp 
+join tbl_social_number sn 
+on fvp.ss_number = sn.ss_number 
+join tbl_fv_location fl  
+on fvp.fv_location_no = fl.fv_location_no;
 
 

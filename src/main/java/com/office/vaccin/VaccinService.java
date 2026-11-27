@@ -43,8 +43,50 @@ public class VaccinService {
 
 		List<VaccinDto> vaccinDtos = vaccinDao.selectRegistedPerson();
 		
+		System.out.println("vaccinDtos.size() : " + vaccinDtos.size());
+		
 		request.setAttribute("vaccinDtos", vaccinDtos);
 		
 	}
+
+	public void selectVaccinDto(HttpServletRequest request, HttpServletResponse response) {
+		
+		int fvp_no = Integer.parseInt(request.getParameter("fvp_no"));
+		
+		VaccinDto selectedVaccinDto = vaccinDao.selselectedVaccinDtoByFvpNo(fvp_no);
+		
+		request.setAttribute("selectedVaccinDto",selectedVaccinDto);
+		
+	}
+
+	public int modify(HttpServletRequest request, HttpServletResponse response) {
+		
+		int fvp_no = Integer.parseInt(request.getParameter("fvp_no"));
+		String fvp_name = request.getParameter("fvp_name");
+		String ss_number = request.getParameter("ss_number");
+		String fvp_mail = request.getParameter("fvp_mail");
+		String fvp_phone = request.getParameter("fvp_phone");
+		int fv_location_no = Integer.parseInt(request.getParameter("fv_location_no"));
+		String fv_type = request.getParameter("fv_type");
+		
+		VaccinDto vaccinDto = new VaccinDto(fvp_name,ss_number,fvp_mail,
+				fvp_phone,fv_location_no,fv_type) ;
+		
+		vaccinDto.setFvp_no(fvp_no);
+		
+		int result = vaccinDao.update(vaccinDto);
+		
+		if (result > 0) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		
+		request.setAttribute("resultForRegiste", result);
+				
+		return result;
+	}
+
+	
 	
 }

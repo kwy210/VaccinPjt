@@ -8,8 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import org.eclipse.tags.shaded.org.apache.regexp.recompile;
-
 
 @WebServlet("*.vac")
 public class VaccinController extends HttpServlet {
@@ -57,6 +55,24 @@ public class VaccinController extends HttpServlet {
 			nextPage = generateView("registed_list");
 			
 			break;
+			
+			
+		case "/injection_modify.vac":
+			
+			vaccinService = new  VaccinService(new VaccinDao());
+			vaccinService.selectVaccinDto(request, response);
+			
+			nextPage = generateView("modify_form");
+			
+			break;
+			
+		case "/injection_modify_confirm.vac":
+			
+			vaccinService = new VaccinService(new VaccinDao());
+			int resultForModify = vaccinService.modify(request, response);
+			
+			nextPage = generateView("modify_result");
+			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);

@@ -1,5 +1,3 @@
-
-<%@page import="java.text.BreakIterator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,9 +18,10 @@
 	<jsp:include page="../include/nav.jsp" />
 
 	<section>
+	
 		<div class="section_wrap">
 	
-		<h1>REDISTE FORM</h1>
+		<h1>REGISTE FORM</h1>
 		
 		
 		
@@ -33,7 +32,7 @@
 		
 		<input class="basic_input" type = "text" name = "fvp_name" placeholder = "input name">
 		<br>
-		 <select class="basic_input" name="ss_number">
+		 <select class="basic_select" name="ss_number">
 		 	<option value="">-------선택-------</option>
 			<option value="720520-1018547">720520-1******</option>
 			<option value="710210-2084561">710210-2******</option>
@@ -44,7 +43,7 @@
 		 <br>
 		 <input class="basic_input" type="email" name="fvp_mail" placeholder="input mail"> 
 		 <br>
-		 <input class="basic_input" name="fvp_phone" placeholder="input phone"> 
+		 <input class="basic_input" type="text" name="fvp_phone" placeholder="input phone"> 
 		 <br>
 		 <select class="basic_select" name="fv_location_no" >
 		 <option value="">-------선택-------</option>
@@ -66,8 +65,6 @@
 		 <br>
 		 <input class="basic_button" type="button" value="REGISTE" onclick="registeForm();">
 		 <input class="basic_button" type="reset" value="RESET">
-		 
-		 
 		 
 		</form>
 		

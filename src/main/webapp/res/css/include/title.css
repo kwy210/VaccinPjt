@@ -24,18 +24,21 @@ li {
 /* input common css start */
 
 .basic_input {
-	width: 350px;
+		width: 350px;
 	padding: 7px;
 	margin: 2px;
 	outline: none;
+	font-size: 1.2em;
+	border: 1px solid #dadada;
+	border-radius: 5px;
 }
 
 .basic_input:focus {
-	background-color: rgba(0, 0, 0, .2);
+	background-color: rgba(0, 0, 255, .1);
 }
 
 .basic_button {
-	width: 120px;
+	width: 125px;
 	padding: 7px;
 	margin: 2px;
 	outline: none;
@@ -46,7 +49,7 @@ li {
 }
 
 .basic_button:hover {
-	background-color: rgba(0, 0, 0, .1);
+	background-color: rgba(0, 0, 255, .1);
 	box-shadow: 3px 3 3px rgba(200, 200, 200, .4);
 }
 

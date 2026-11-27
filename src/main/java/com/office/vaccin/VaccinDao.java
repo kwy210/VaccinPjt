@@ -93,6 +93,8 @@ public List<VaccinDto> selectRegistedPerson() {
 			
 			while (rs.next()) {
 				
+				System.out.println("++++++++++");
+				
 				// VaccinDto
 				int fvp_no = rs.getInt("fvp_no");
 				String fvp_name = rs.getString("fvp_name");
@@ -153,8 +155,127 @@ public List<VaccinDto> selectRegistedPerson() {
 			
 		}
 		
+		System.out.println("dao" + vaccinDtos.size());
+		
 		return vaccinDtos;
 		
 	}
+
+public VaccinDto selselectedVaccinDtoByFvpNo(int no) {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	List<VaccinDto> vaccinDtos = new ArrayList<VaccinDto>();
+	
+	try {
+		
+		Class.forName(DRIVER);
+		
+		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+		
+		String sql =  "select * from tbl_flu_vaccin_person where fvp_no =?";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, no);
+		
+		rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			
+			// VaccinDto
+			int fvp_no = rs.getInt("fvp_no");
+			String fvp_name = rs.getString("fvp_name");
+			String ss_number = rs.getString("ss_number");
+			String fvp_mail = rs.getString("fvp_mail");
+			String fvp_phone = rs.getString("fvp_phone");
+			int fv_location_no = rs.getInt("fv_location_no");
+			String fv_type = rs.getString("fv_type");
+			String fvp_reg_date = rs.getString("fvp_reg_date");
+			
+			VaccinDto dto = new VaccinDto(fvp_no, fvp_name, ss_number, fvp_mail, fvp_phone, fv_location_no, fv_type, fvp_reg_date);
+			
+			vaccinDtos.add(dto);
+			
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	} finally {
+		
+		try {
+			
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+			
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			
+		}
+		
+	}
+	
+	return vaccinDtos.get(0);
+	
+}
+
+public int update(VaccinDto vaccinDto) {
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	int result = -1;
+	
+	try {
+		
+		Class.forName(DRIVER);
+		
+		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+		
+		String sql =  "update "
+					+ 	"tbl_flu_vaccin_person"
+					+ "set "
+					+ 	"fvp_name		= ?, "
+					+ 	"ss_number		= ?, "
+					+ 	"fvp_mail		= ?, "
+					+ 	"fvp_phone		= ?, "
+					+ 	"fv_location_no	= ?, "
+					+ 	"fv_type 		= ? "
+					+ "where "
+					+ 	"fvp_no = ?";
+					
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, vaccinDto.getFvp_name());
+		pstmt.setString(2, vaccinDto.getSs_number());
+		pstmt.setString(3, vaccinDto.getFvp_mail());
+		pstmt.setString(4, vaccinDto.getFvp_phone());
+		pstmt.setInt(5, vaccinDto.getFv_location_no());
+		pstmt.setString(6, vaccinDto.getFv_type());
+		pstmt.setInt(7, vaccinDto.getFvp_no());
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		
+	} finally {
+		
+		try {
+			
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+			
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			
+		}
+		
+	}
+	
+	return result;
+}
 
 }
